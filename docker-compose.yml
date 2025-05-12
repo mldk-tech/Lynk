@@ -1,0 +1,20 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/app:/app/app # For live reloading during development
+    container_name: lynk-generator-backend
+  
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80" # Access UI at http://localhost:8080
+    depends_on:
+      - backend
+    container_name: lynk-generator-frontend
+
+networks:
+  default:
+    name: lynk_generator_network
